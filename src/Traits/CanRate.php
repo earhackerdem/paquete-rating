@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait CanRate
 {
-    public function ratings($model = null) : MorphToMany
+    public function ratings($model = null): MorphToMany
     {
         $modelClass = $model ? (new $model)->getMorphClass() : $this->getMorphClass();
 
@@ -41,16 +41,16 @@ trait CanRate
         $from = config('rating.from');
         $to = config('rating.to');
 
-        if($score< $from  || $score > $to){
-            throw new InvalidScore($from,$to);
+        if ($score < $from || $score > $to) {
+            throw new InvalidScore($from, $to);
         }
 
         $this->ratings($model)->attach($model->getKey(), [
             'score' => $score,
-            'rateable_type' => get_class($model)
+            'rateable_type' => get_class($model),
         ]);
 
-        event(new ModelRatedEvent($this,$model, $score));
+        event(new ModelRatedEvent($this, $model, $score));
 
         return true;
     }
@@ -63,7 +63,7 @@ trait CanRate
 
         $this->ratings($model->getMorphClass())->detach($model->getKey());
 
-        event(new ModelUnratedEvent($this,$model));
+        event(new ModelUnratedEvent($this, $model));
 
         return true;
     }

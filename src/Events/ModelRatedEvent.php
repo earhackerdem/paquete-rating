@@ -37,7 +37,4 @@ class ModelRatedEvent
     {
         return $this->score;
     }
-
-
-
 }

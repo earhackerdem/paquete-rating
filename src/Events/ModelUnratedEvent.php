@@ -17,10 +17,9 @@ class ModelUnratedEvent
     public function __construct(
         private Model $qualifier,
         private Model $rateable
-    ){
+    ) {
         //
     }
-
 
     public function getQualifier()
     {

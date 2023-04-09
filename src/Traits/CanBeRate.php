@@ -2,13 +2,13 @@
 
 namespace EarHackerDem\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use EarHackerDem\Models\Rating;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait CanBeRate
 {
-    public function qualifiers(string $model = null) : MorphToMany
+    public function qualifiers(string $model = null): MorphToMany
     {
         $modelClass = $model ? (new $model)->getMorphClass() : $this->getMorphClass();
 
@@ -25,8 +25,8 @@ trait CanBeRate
 
     public function qualifications(): HasMany
     {
-        $hasMany = $this->hasMany(Rating::class,'rateable_id');
-        return $hasMany->where('rateable_type',$this->getMorphClass);
-    }
+        $hasMany = $this->hasMany(Rating::class, 'rateable_id');
 
+        return $hasMany->where('rateable_type', $this->getMorphClass);
+    }
 }

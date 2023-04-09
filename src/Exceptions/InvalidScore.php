@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidScore extends Exception
 {
-
     public function __construct(private $from, private $to)
     {
     }
@@ -17,7 +16,7 @@ class InvalidScore extends Exception
             trans('rating.invalidScore', [
                 'from' => $this->from,
                 'to' => $this->to,
-            ])
+            ]),
         ]);
     }
 }
